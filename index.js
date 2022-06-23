@@ -1,13 +1,38 @@
 const Template  = document.createElement('template');
 template.innerHTML=`
 <style>
-.form_element--label{
+form.sign--form {
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+}
+.form-input{
+    height: 40px;
+}
+
+/* input element styles */
+.form-element{
+    position: relative;
+    height: 51px;
+    width: 100%;
+}
+.form-element input{
     position: absolute;
-    opacity: 0.8;
-    z-index: 1;
-    top: 50%;
-    transform: translate(10px, -50%);
-    transition: opacity .1s cubic-bezier(0, 0, 0, 0.3 ), transform .1s cubic-bezier(0, 0, 0, 0.3 );
+    bottom: 0;
+    height: 100%;
+    width: 100%;
+    padding-left: 10px;
+    border: none;
+    background-color: transparent;
+    padding-top: 12px;
+    outline-width: 0;
+    outline-color: transparent;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+}
+.form-element input:invalid{
+    border-color: #F00;
+
 }
 .form-element input:invalid +label{
     color: #F00;
@@ -21,7 +46,6 @@ template.innerHTML=`
     color: red;
     opacity: 0;
 }
-
 .form-element input:invalid ~ .form-element--error-message {
     opacity: 1;
 }
@@ -47,7 +71,6 @@ template.innerHTML=`
     transition: opacity .1s cubic-bezier(0, 0, 0, 0.3 ), transform .1s cubic-bezier(0, 0, 0, 0.3 );
 }
 
-
 </style>
 
 
@@ -64,6 +87,9 @@ class UserName extends HTMLInputElement{
         this.shadowRoot.appendChild(Template.content.cloneNode(true));
 
         this.shadowRoot.querySelector('input').innerText = this.getAttribute('for');
+
+    }
+    attributeChangedCallback(){
 
     }
 }
